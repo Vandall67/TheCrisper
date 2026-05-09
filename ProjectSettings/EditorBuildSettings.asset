@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/_TheCrisper/Scenes/MainMenu.unity
     guid: 87d89a7cb964008458994a38383f844d
   - enabled: 1
+    path: Assets/_TheCrisper/Scenes/LoadingScreen.unity
+    guid: 211d78a1d4f11d3408c559280737d302
+  - enabled: 1
     path: Assets/_TheCrisper/Scenes/Gameplay.unity
     guid: bd928be5409dcb64b8a622e83e50c24c
   m_configObjects: {}

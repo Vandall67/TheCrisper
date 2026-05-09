@@ -3193,7 +3193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0466e9689fb93dd409ff31f68b587fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  gameplaySceneName: Gameplay
+  gameplaySceneName: LoadingScreen
   mainPanelGroup: {fileID: 1108552552}
   optionsPanelGroup: {fileID: 1282449177}
 --- !u!4 &1428437957
