@@ -5,6 +5,8 @@ public class PauseMenuController : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private GameObject pauseMenuCanvas;
+    [SerializeField] private GameObject pausePanelGroup;
+    [SerializeField] private GameObject pauseOptionsPanelGroup;
 
     [Header("Scene Names")]
     [SerializeField] private string mainMenuSceneName = "MainMenu";
@@ -40,6 +42,7 @@ public class PauseMenuController : MonoBehaviour
             pauseMenuCanvas.SetActive(false);
         }
 
+        ShowPausePanel();
         Time.timeScale = 1f;
     }
 
@@ -52,17 +55,44 @@ public class PauseMenuController : MonoBehaviour
             pauseMenuCanvas.SetActive(true);
         }
 
+        ShowPausePanel();
         Time.timeScale = 0f;
     }
 
     public void OpenOptions()
     {
-        Debug.Log("Pause options clicked.");
+        if (pausePanelGroup != null)
+        {
+            pausePanelGroup.SetActive(false);
+        }
+
+        if (pauseOptionsPanelGroup != null)
+        {
+            pauseOptionsPanelGroup.SetActive(true);
+        }
+    }
+
+    public void CloseOptions()
+    {
+        ShowPausePanel();
     }
 
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(mainMenuSceneName);
+    }
+
+    private void ShowPausePanel()
+    {
+        if (pausePanelGroup != null)
+        {
+            pausePanelGroup.SetActive(true);
+        }
+
+        if (pauseOptionsPanelGroup != null)
+        {
+            pauseOptionsPanelGroup.SetActive(false);
+        }
     }
 }
