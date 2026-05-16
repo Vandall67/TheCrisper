@@ -49,7 +49,7 @@ public class HUDController : MonoBehaviour
             UpdateFragments(4);
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+       /*  if (Input.GetKeyDown(KeyCode.B))
         {
             UpdateBlueVision(true);
         }
@@ -57,7 +57,7 @@ public class HUDController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N))
         {
             UpdateBlueVision(false);
-        }
+        } */
     }
 
     public void UpdateTemperature(float temperaturePercentage)
