@@ -12,17 +12,17 @@ public class BlueVisionController : MonoBehaviour
     [Header("Runtime")]
     [SerializeField] private bool isBlueVisionActive;
 
-    private BlueVisionRevealable[] revealableObjects;
+    private BlueVisionRevealable[] revealableObjects;// Cache of revealable objects in the scene
 
     private void Start()
-    {
+    {   // Find all revealable objects in the scene at the start and cache them
         revealableObjects = FindObjectsByType<BlueVisionRevealable>(FindObjectsSortMode.None);
         SetBlueVisionState(false);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(toggleKey))
+        if (Input.GetKeyDown(toggleKey))// Toggle blue vision when the specified key is pressed
         {
             ToggleBlueVision();
         }
@@ -30,13 +30,14 @@ public class BlueVisionController : MonoBehaviour
 
     public void ToggleBlueVision()
     {
-        SetBlueVisionState(!isBlueVisionActive);
+        SetBlueVisionState(!isBlueVisionActive);// Toggle the blue vision state
     }
 
-    public void SetBlueVisionState(bool isActive)
+    public void SetBlueVisionState(bool isActive)//
     {
         isBlueVisionActive = isActive;
 
+        // Update the blue vision overlay
         if (blueVisionOverlay != null)
         {
             blueVisionOverlay.SetActive(isBlueVisionActive);
@@ -51,7 +52,7 @@ public class BlueVisionController : MonoBehaviour
         {
             return;
         }
-
+        // Set the blue vision state for each revealable object
         foreach (BlueVisionRevealable revealable in revealableObjects)
         {
             if (revealable != null)
