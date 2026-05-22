@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float velocidade = 4f;
+    [SerializeField] private float forcaEmpurrao = 8f;
 
     private Rigidbody rb;
     private Vector3 movimento;
@@ -24,5 +25,23 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 novaPosicao = rb.position + movimento * velocidade * Time.fixedDeltaTime;
         rb.MovePosition(novaPosicao);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Empurravel"))
+        {
+            Rigidbody rbObjeto = collision.rigidbody;
+
+            if (rbObjeto != null && !rbObjeto.isKinematic)
+            {
+                Vector3 direcaoEmpurrao = new Vector3(movimento.x, 0f, movimento.z);
+
+                if (direcaoEmpurrao.magnitude > 0.1f)
+                {
+                    rbObjeto.AddForce(direcaoEmpurrao.normalized * forcaEmpurrao, ForceMode.Force);
+                }
+            }
+        }
     }
 }
