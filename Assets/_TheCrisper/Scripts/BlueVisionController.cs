@@ -12,6 +12,8 @@ public class BlueVisionController : MonoBehaviour
     [Header("Runtime")]
     [SerializeField] private bool isBlueVisionActive;
 
+    public bool IsBlueVisionActive => isBlueVisionActive;
+
     private BlueVisionRevealable[] revealableObjects;// Cache of revealable objects in the scene
 
     private void Start()

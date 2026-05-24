@@ -3,25 +3,50 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int fragmentosRecolhidos = 0;
-    public int totalFragmentos = 4;
+    [Header("Map Fragments")]
+    [SerializeField] private int fragmentosRecolhidos = 0;
+    [SerializeField] private int totalFragmentos = 4;
 
+    [Header("HUD")]
+    [SerializeField] private HUDController hudController;
+
+    [Header("Optional Automatic Scene Transition")]
+    [SerializeField] private bool loadSceneWhenMapComplete = false;
     [SerializeField] private string nomeCenaSeguinte;
+
+    public int FragmentosRecolhidos => fragmentosRecolhidos;
+    public int TotalFragmentos => totalFragmentos;
+    public bool MapaCompleto => fragmentosRecolhidos >= totalFragmentos;
+
+    private void Start()
+    {
+        AtualizarHUDFragmentos();
+    }
 
     public void RecolherFragmento()
     {
-        fragmentosRecolhidos++;
+        fragmentosRecolhidos = Mathf.Clamp(fragmentosRecolhidos + 1, 0, totalFragmentos);
 
         Debug.Log("Fragmentos recolhidos: " + fragmentosRecolhidos + "/" + totalFragmentos);
 
-        if (fragmentosRecolhidos >= totalFragmentos)
+        AtualizarHUDFragmentos();
+
+        if (MapaCompleto)
         {
             Debug.Log("Mapa completo!");
 
-            if (!string.IsNullOrEmpty(nomeCenaSeguinte))
+            if (loadSceneWhenMapComplete && !string.IsNullOrEmpty(nomeCenaSeguinte))
             {
                 SceneManager.LoadScene(nomeCenaSeguinte);
             }
+        }
+    }
+
+    private void AtualizarHUDFragmentos()
+    {
+        if (hudController != null)
+        {
+            hudController.UpdateFragments(fragmentosRecolhidos);
         }
     }
 }
