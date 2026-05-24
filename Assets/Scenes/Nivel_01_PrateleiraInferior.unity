@@ -877,6 +877,7 @@ GameObject:
   - component: {fileID: 499567913}
   - component: {fileID: 499567917}
   - component: {fileID: 499567918}
+  - component: {fileID: 499567919}
   m_Layer: 0
   m_Name: Player_Teste
   m_TagString: Player
@@ -1020,6 +1021,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   velocidade: 3
   forcaEmpurrao: 23
+--- !u!114 &499567919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499567912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b70d4e85fc9e36448c1ba9d4afed6e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerTemperatureController
+  maxTemperature: 100
+  currentTemperature: 100
+  baseTemperatureLossPerSecond: 0.75
+  blueVisionExtraLossPerSecond: 2
+  hudController: {fileID: 297161545}
+  coldVisualController: {fileID: 1766747181}
+  blueVisionController: {fileID: 926367622}
+  gameOverSceneName: GameOver
+  triggerGameOverAtZero: 1
 --- !u!1001 &525633295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2245,6 +2267,18 @@ PrefabInstance:
       value: Fragmento_Mapa_02
       objectReference: {fileID: 0}
     - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -114.02
       objectReference: {fileID: 0}
@@ -2779,6 +2813,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   fragmentosRecolhidos: 0
   totalFragmentos: 4
+  hudController: {fileID: 297161545}
+  loadSceneWhenMapComplete: 1
   nomeCenaSeguinte: Nivel_02_PrateleiraSuperior
 --- !u!4 &1591172465
 Transform:
@@ -2881,6 +2917,18 @@ PrefabInstance:
     - target: {fileID: 70967966608179058, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
       propertyPath: m_Name
       value: Fragmento_Mapa_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3243,6 +3291,18 @@ PrefabInstance:
       value: Fragmento_Mapa_03
       objectReference: {fileID: 0}
     - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -97.43
       objectReference: {fileID: 0}
@@ -3379,7 +3439,7 @@ GameObject:
   - component: {fileID: 1828635534}
   - component: {fileID: 1828635533}
   m_Layer: 0
-  m_Name: LevelEnd_Trigger_To_Nivel02
+  m_Name: NextLevel_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3398,6 +3458,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelEndTrigger
   sceneToLoad: Nivel_02_PrateleiraSuperior
+  requireAllFragments: 1
+  gameManager: {fileID: 1591172464}
   playerTag: Player
 --- !u!65 &1828635534
 BoxCollider:
@@ -3940,8 +4002,20 @@ PrefabInstance:
       value: Fragmento_Mapa_04
       objectReference: {fileID: 0}
     - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -104.05
+      value: -99.98
       objectReference: {fileID: 0}
     - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3949,7 +4023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 168.57
+      value: 168.29
       objectReference: {fileID: 0}
     - target: {fileID: 1412838282242167176, guid: dae1034ccd712a84db67172c49fd649a, type: 3}
       propertyPath: m_LocalRotation.w
