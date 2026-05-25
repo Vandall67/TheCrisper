@@ -5,6 +5,8 @@ using UnityEngine;
 
 
 
+
+
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -21,7 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 movimento;
 
-
+    [SerializeField]
+    private float jumpPower;
 
     private float xRotation = 0f;
     private float minX = -10f;  // how far up
@@ -30,9 +33,11 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator playerAnim;
 
+    private Rigidbody playerRb;
+
     void Start()
     {
-
+        playerRb = GetComponent<Rigidbody>(); //get ridgbody
     }
 
     // Update is called once per frame
@@ -61,6 +66,14 @@ public class PlayerMovement : MonoBehaviour
             transform.position += transform.TransformDirection(Vector3.left) * Time.deltaTime * movementSpeed;
         }
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            StartCoroutine(jump());
+        }
+
+
+
+
         //Sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -78,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         //aniamtion
+        // Front --- BACK
         if (Input.GetKeyDown("w")) //Keycode.w
         {
             playerAnim.SetTrigger("jog");
@@ -104,6 +118,61 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
+
+
+        //LEFT --- RIGHT
+        if (Input.GetKeyDown(KeyCode.A)) //Keycode.w
+        {
+            playerAnim.SetTrigger("jogleft");
+            playerAnim.ResetTrigger("idle");
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            playerAnim.ResetTrigger("jogleft");
+            playerAnim.SetTrigger("idle");
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            playerAnim.SetTrigger("jogright");
+            playerAnim.ResetTrigger("idle");
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            playerAnim.ResetTrigger("jogright");
+            playerAnim.SetTrigger("idle");
+        }
+
+
+        //jump
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            playerAnim.SetTrigger("jump");
+            playerAnim.ResetTrigger("idle");
+        }
+        // if (Input.GetKeyUp(KeyCode.Space))
+        // {
+        //     playerAnim.SetTrigger("idle");
+        //     playerAnim.ResetTrigger("jump");
+
+        // }
+
+        //Sprint
+        if (walking == true)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                playerAnim.SetTrigger("run");
+                playerAnim.ResetTrigger("jog");
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                playerAnim.SetTrigger("jog");
+                playerAnim.ResetTrigger("run");
+            }
+        }
+
         //rotate player on x
         //Yaw rotates the camera around its local Up axis
         transform.Rotate(Vector3.up * Time.deltaTime * Input.GetAxis("Mouse X") * rotationspeed);
@@ -119,24 +188,6 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (walking == true)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                playerAnim.SetTrigger("run");
-                playerAnim.ResetTrigger("jog");
-
-            }
-
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                playerAnim.SetTrigger("jog");
-                playerAnim.ResetTrigger("run");
-            }
-        }
-
-        //Sprint
-
 
 
         //this needs better implementation
@@ -146,15 +197,16 @@ public class PlayerMovement : MonoBehaviour
         movimento = new Vector3(horizontal, 0f, vertical).normalized;
     }
 
-    public void OnKey()
+
+
+
+    private IEnumerator jump()
     {
+        yield return new WaitForSeconds(0.6f);
+        //transform.position += transform.TransformDirection(Vector3.up) * Time.deltaTime * movementSpeed;
+        playerRb.AddForce(Vector2.up * jumpPower);
 
     }
-
-
-
-
-
 
     //Colisions
     private void OnCollisionStay(Collision collision)
