@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/LoadingScreen.unity
     guid: 211d78a1d4f11d3408c559280737d302
   - enabled: 1
-    path: Assets/Scenes/Gameplay.unity
+    path: Assets/Scenes/Cutsene01.unity
     guid: bd928be5409dcb64b8a622e83e50c24c
   - enabled: 1
     path: Assets/Scenes/UI/GameOver.unity
