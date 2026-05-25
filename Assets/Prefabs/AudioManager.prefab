@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3858591342698288926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3801285328621755064}
+  - component: {fileID: 1188525224764579155}
+  - component: {fileID: 2835808798593318362}
+  - component: {fileID: 4098880979988115778}
+  - component: {fileID: 2731556874853721035}
+  - component: {fileID: 8075262031568807593}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3801285328621755064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858591342698288926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1188525224764579155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858591342698288926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec5739e2c1e846459854075f8b2f747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioAmbience
+  sfxFridgeHum1: {fileID: 8300000, guid: 6b719e72cf6b28d47ba60329fd52d958, type: 3}
+  sfxFridgeHum2: {fileID: 8300000, guid: 83067961ea5b2b845930d71c7276873b, type: 3}
+  volume: 0.3
+--- !u!114 &2835808798593318362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858591342698288926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad4c2cc4dac2b744875c259bd59ca09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioBreathing
+  coldOverlayImage: {fileID: 0}
+  sfxBreathingNormal: {fileID: 8300000, guid: 8827718984268374f8e77ed51ca4b91b, type: 3}
+  sfxBreathingCold: {fileID: 8300000, guid: 7cee8f2569eaa824984996900bae961d, type: 3}
+  sfxIceCrack: {fileID: 8300000, guid: 5103fa2d3ffc5e241923fa539b195f7d, type: 3}
+  volume: 1
+  maxOverlayAlpha: 0.28
+  threshold: 0.14
+  iceCrackThreshold: 0.9
+--- !u!114 &4098880979988115778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858591342698288926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5052b9cd3a99bd64e8460b3b93085499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioBlueVision
+  blueVisionOverlay: {fileID: 0}
+  sfxVisionActivate: {fileID: 8300000, guid: 51eedf77ed8bed84cbb0bacc4d234e9d, type: 3}
+  volume: 1
+--- !u!114 &2731556874853721035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858591342698288926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edca87d6618c2f428836111a69ceb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioFragments
+  gameManager: {fileID: 0}
+  sfxFragmentCollect: {fileID: 8300000, guid: 9b1c68330105ea94ca1d666030284553, type: 3}
+  sfxHeatCollect: {fileID: 8300000, guid: 1e0d276515e964945a567d8de519a566, type: 3}
+  sfxGameOverFreeze: {fileID: 8300000, guid: 0570a4acaa945ca4a9e478073b8b41a0, type: 3}
+  volume: 1
+--- !u!114 &8075262031568807593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858591342698288926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caedf83186ddd6a499ea560c16eb8a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioShelfCreak
+  playerTransform: {fileID: 0}
+  sfxShelfCreaks:
+  - {fileID: 8300000, guid: cb1a7f4d2bd1af448b2567b1d537e866, type: 3}
+  - {fileID: 8300000, guid: 4fd5b11d0e04be94a8df8af4734e49d8, type: 3}
+  - {fileID: 8300000, guid: f75285b9190c6184bb10d31d6797ac60, type: 3}
+  volume: 0.4
