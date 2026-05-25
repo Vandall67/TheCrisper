@@ -1321,6 +1321,127 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1165227165503926995, guid: 24d14fa346a4942559b4d417f7b20639, type: 3}
   m_PrefabInstance: {fileID: 1634249361}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &790276154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 790276160}
+  - component: {fileID: 790276159}
+  - component: {fileID: 790276158}
+  - component: {fileID: 790276157}
+  - component: {fileID: 790276156}
+  - component: {fileID: 790276155}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &790276155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790276154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caedf83186ddd6a499ea560c16eb8a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioShelfCreak
+  playerTransform: {fileID: 499567916}
+  sfxShelfCreaks:
+  - {fileID: 8300000, guid: cb1a7f4d2bd1af448b2567b1d537e866, type: 3}
+  - {fileID: 8300000, guid: 4fd5b11d0e04be94a8df8af4734e49d8, type: 3}
+  - {fileID: 8300000, guid: f75285b9190c6184bb10d31d6797ac60, type: 3}
+  volume: 0.4
+--- !u!114 &790276156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790276154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edca87d6618c2f428836111a69ceb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioFragments
+  gameManager: {fileID: 1591172464}
+  sfxFragmentCollect: {fileID: 8300000, guid: 9b1c68330105ea94ca1d666030284553, type: 3}
+  sfxHeatCollect: {fileID: 8300000, guid: 1e0d276515e964945a567d8de519a566, type: 3}
+  sfxGameOverFreeze: {fileID: 8300000, guid: 0570a4acaa945ca4a9e478073b8b41a0, type: 3}
+  volume: 1
+--- !u!114 &790276157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790276154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5052b9cd3a99bd64e8460b3b93085499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioBlueVision
+  blueVisionOverlay: {fileID: 2078091112}
+  sfxVisionActivate: {fileID: 8300000, guid: 51eedf77ed8bed84cbb0bacc4d234e9d, type: 3}
+  volume: 1
+--- !u!114 &790276158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790276154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad4c2cc4dac2b744875c259bd59ca09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioBreathing
+  coldOverlayImage: {fileID: 974605259}
+  sfxBreathingNormal: {fileID: 8300000, guid: 8827718984268374f8e77ed51ca4b91b, type: 3}
+  sfxBreathingCold: {fileID: 8300000, guid: 7cee8f2569eaa824984996900bae961d, type: 3}
+  sfxIceCrack: {fileID: 8300000, guid: 5103fa2d3ffc5e241923fa539b195f7d, type: 3}
+  volume: 1
+  maxOverlayAlpha: 0.28
+  threshold: 0.14
+  iceCrackThreshold: 0.9
+--- !u!114 &790276159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790276154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec5739e2c1e846459854075f8b2f747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioAmbience
+  sfxFridgeHum1: {fileID: 8300000, guid: 6b719e72cf6b28d47ba60329fd52d958, type: 3}
+  sfxFridgeHum2: {fileID: 8300000, guid: 83067961ea5b2b845930d71c7276873b, type: 3}
+  volume: 0.3
+--- !u!4 &790276160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790276154}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &809455129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3952,3 +4073,4 @@ SceneRoots:
   - {fileID: 1766747182}
   - {fileID: 926367623}
   - {fileID: 1385309520}
+  - {fileID: 790276160}
