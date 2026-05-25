@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public int fragmentosRecolhidos = 0;
     public int totalFragmentos = 4;
     [SerializeField] private float timeRemaining = 60f;
+    [SerializeField] private float maxtimeRemaining = 60f;
     private bool timerRunning = true;
 
 
@@ -52,7 +53,10 @@ public class GameManager : MonoBehaviour
 
         //regra de tres simples???
 
-        hudController.UpdateTemperature(timeRemaining);
+
+
+        //hudController.UpdateTemperature(timeRemaining);
+        hudController.UpdateTemperature(100 * timeRemaining / maxtimeRemaining);
     }
 
 
