@@ -73,16 +73,20 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+        // if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S)) // this needs testing
+        // {
+            //Sprint
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+            {
+                movementSpeed = 10;
+            }
+            else
+            {
+                movementSpeed = 5;
+            }
 
-        //Sprint
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            movementSpeed = 10;
-        }
-        else
-        {
-            movementSpeed = 5;
-        }
+
+       // }
     }
 
 
@@ -92,26 +96,26 @@ public class PlayerMovement : MonoBehaviour
 
         //aniamtion
         // Front --- BACK
-        if (Input.GetKeyDown("w")) //Keycode.w
+        if (Input.GetKeyDown(KeyCode.W)) //Keycode.w
         {
             playerAnim.SetTrigger("jog");
             playerAnim.ResetTrigger("idle");
             walking = true;
 
         }
-        if (Input.GetKeyUp("w"))
+        if (Input.GetKeyUp(KeyCode.W))
         {
             playerAnim.ResetTrigger("jog");
             playerAnim.SetTrigger("idle");
             walking = false;
         }
 
-        if (Input.GetKeyDown("s"))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             playerAnim.SetTrigger("jogback");
             playerAnim.ResetTrigger("idle");
         }
-        if (Input.GetKeyUp("s"))
+        if (Input.GetKeyUp(KeyCode.S))
         {
             playerAnim.ResetTrigger("jogback");
             playerAnim.SetTrigger("idle");
@@ -160,16 +164,21 @@ public class PlayerMovement : MonoBehaviour
         //Sprint
         if (walking == true)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                playerAnim.SetTrigger("run");
-                playerAnim.ResetTrigger("jog");
-            }
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) // this needs testing
             {
-                playerAnim.SetTrigger("jog");
-                playerAnim.ResetTrigger("run");
+
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    playerAnim.SetTrigger("run");
+                    playerAnim.ResetTrigger("jog");
+                }
+
+                if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    playerAnim.SetTrigger("jog");
+                    playerAnim.ResetTrigger("run");
+                }
             }
         }
 
