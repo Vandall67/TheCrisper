@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db22e5fc0d3338b468c8b75566b321fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverController
-  gameplaySceneName: LoadingScreen
+  gameplaySceneName: Nivel_01_PrateleiraInferior
   mainMenuSceneName: MainMenu
 --- !u!4 &1701637559
 Transform:
