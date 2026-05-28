@@ -254,10 +254,10 @@ PrefabInstance:
     - target: {fileID: 8691377324003950478, guid: afe336d35c2fe8548b84ec895c1a63b8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ec2e3be5bfd75aa4294049ad731073ea, type: 3}
+      objectReference: {fileID: 21300000, guid: 06d65b64b6de2444f8e6bea19b527338, type: 3}
     - target: {fileID: 9153452720721180869, guid: afe336d35c2fe8548b84ec895c1a63b8, type: 3}
       propertyPath: m_Name
-      value: mouseR
+      value: B
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
