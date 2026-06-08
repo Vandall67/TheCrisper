@@ -133,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
         // Jump
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            playerAnim.SetTrigger("idle"); // i am forcint it to go to idle first
             playerAnim.SetTrigger("jump");
             playerAnim.ResetTrigger("idle");
         }

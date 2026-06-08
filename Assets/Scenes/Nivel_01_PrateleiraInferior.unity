@@ -1310,6 +1310,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 972983822070143419, guid: 51ef55b7c19a7462a9b841d13ffbb6c6, type: 3}
   m_PrefabInstance: {fileID: 446124926}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &464143845 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5039860284408458588, guid: 5bf1ccd77b0539e4b99551b8a6218d11, type: 3}
+  m_PrefabInstance: {fileID: 1214116463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &495903053
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2355,7 @@ MonoBehaviour:
   hudController: {fileID: 297161545}
   blueVisionOverlay: {fileID: 2078091112}
   isBlueVisionActive: 0
+  playerAnim: {fileID: 464143845}
 --- !u!4 &926367623
 Transform:
   m_ObjectHideFlags: 0
@@ -2980,6 +2986,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5070978296895024523, guid: 5bf1ccd77b0539e4b99551b8a6218d11, type: 3}
+      propertyPath: playerAnim
+      value: 
+      objectReference: {fileID: 464143845}
+    - target: {fileID: 5070978296895024523, guid: 5bf1ccd77b0539e4b99551b8a6218d11, type: 3}
       propertyPath: hudController
       value: 
       objectReference: {fileID: 297161545}
@@ -2991,9 +3001,17 @@ PrefabInstance:
       propertyPath: coldVisualController
       value: 
       objectReference: {fileID: 1766747181}
+    - target: {fileID: 5070978296895024523, guid: 5bf1ccd77b0539e4b99551b8a6218d11, type: 3}
+      propertyPath: baseTemperatureLossPerSecond
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6965714397923530021, guid: 5bf1ccd77b0539e4b99551b8a6218d11, type: 3}
       propertyPath: m_Name
       value: PlayerV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573147803482992796, guid: 5bf1ccd77b0539e4b99551b8a6218d11, type: 3}
+      propertyPath: jumpPower
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
