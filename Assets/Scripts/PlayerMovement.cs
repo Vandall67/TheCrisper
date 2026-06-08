@@ -1,107 +1,91 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEngine;
-
-
-
-
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Transform Camera;
+    [SerializeField] private float forcaEmpurrao = 8f;
+    [SerializeField] private float jumpPower;
+    [SerializeField] private float rotationSpeed = 10f; // Slerp-friendly value
 
-
-
-    [SerializeField]
-    private Transform camera;
-    [SerializeField]
-    private float forcaEmpurrao = 8f;
-
-
-    float movementSpeed = 5;
-    float rotationspeed = 500f;
-
+    private float movementSpeed = 5f;
     private Vector3 movimento;
-
-    [SerializeField]
-    private float jumpPower;
-
     private float xRotation = 0f;
-    private float minX = -10f;  // how far up
+    private float minX = -10f;
     private float maxX = 10f;
-
+    private bool walking = false;
 
     public Animator playerAnim;
-
     private Rigidbody playerRb;
 
     void Start()
     {
-        playerRb = GetComponent<Rigidbody>(); //get ridgbody
+        playerRb = GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
-
-    bool walking;
-
-
-
-    void FixedUpdate()
-    {
-        //basic input
-        if (Input.GetKey("w")) //Keycode.w
-        {
-            transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed;
-        }
-        if (Input.GetKey("s"))
-        {
-            transform.position -= transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed;
-        }
-        if (Input.GetKey("d"))
-        {
-            transform.position -= transform.TransformDirection(Vector3.left) * Time.deltaTime * movementSpeed;
-        }
-        if (Input.GetKey("a"))
-        {
-            transform.position += transform.TransformDirection(Vector3.left) * Time.deltaTime * movementSpeed;
-        }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            StartCoroutine(jump());
-        }
-
-
-
-        // if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S)) // this needs testing
-        // {
-            //Sprint
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
-            {
-                movementSpeed = 10;
-            }
-            else
-            {
-                movementSpeed = 5;
-            }
-
-
-       // }
-    }
-
-
 
     void Update()
     {
+        HandleRotation();
+        HandleAnimations();
+        HandleCameraInput();
+    }
 
-        //aniamtion
-        // Front --- BACK
-        if (Input.GetKeyDown(KeyCode.W)) //Keycode.w
+    void FixedUpdate()
+    {
+        HandleMovement();
+    }
+
+    void HandleRotation()
+    {
+        Vector3 lookDirection = Camera.transform.forward;
+        lookDirection.y = 0f;
+        lookDirection.Normalize();
+
+        if (lookDirection == Vector3.zero) return;
+
+        float angle = Vector3.Angle(transform.forward, lookDirection);
+        bool isFacingCamera = angle < 5f;
+
+        // Rotate toward camera direction only when moving forward
+        if (!isFacingCamera && Input.GetKey(KeyCode.W))
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    void HandleMovement()
+    {
+        movimento = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.W))
+            movimento += transform.TransformDirection(Vector3.forward);
+        if (Input.GetKey(KeyCode.S))
+            movimento += transform.TransformDirection(Vector3.back);
+        if (Input.GetKey(KeyCode.D))
+            movimento += transform.TransformDirection(Vector3.right);
+        if (Input.GetKey(KeyCode.A))
+            movimento += transform.TransformDirection(Vector3.left);
+
+        // Sprint
+        movementSpeed = (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W)) ? 10f : 5f;
+
+        transform.position += movimento.normalized * movementSpeed * Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.Space))
+            StartCoroutine(jump());
+    }
+
+    void HandleAnimations()
+    {
+        // Forward
+        if (Input.GetKeyDown(KeyCode.W))
         {
             playerAnim.SetTrigger("jog");
             playerAnim.ResetTrigger("idle");
             walking = true;
-
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
@@ -110,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
             walking = false;
         }
 
+        // Back
         if (Input.GetKeyDown(KeyCode.S))
         {
             playerAnim.SetTrigger("jogback");
@@ -121,11 +106,8 @@ public class PlayerMovement : MonoBehaviour
             playerAnim.SetTrigger("idle");
         }
 
-
-
-
-        //LEFT --- RIGHT
-        if (Input.GetKeyDown(KeyCode.A)) //Keycode.w
+        // Left
+        if (Input.GetKeyDown(KeyCode.A))
         {
             playerAnim.SetTrigger("jogleft");
             playerAnim.ResetTrigger("idle");
@@ -136,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
             playerAnim.SetTrigger("idle");
         }
 
+        // Right
         if (Input.GetKeyDown(KeyCode.D))
         {
             playerAnim.SetTrigger("jogright");
@@ -147,93 +130,55 @@ public class PlayerMovement : MonoBehaviour
             playerAnim.SetTrigger("idle");
         }
 
-
-        //jump
+        // Jump
         if (Input.GetKeyUp(KeyCode.Space))
         {
             playerAnim.SetTrigger("jump");
             playerAnim.ResetTrigger("idle");
         }
-        // if (Input.GetKeyUp(KeyCode.Space))
-        // {
-        //     playerAnim.SetTrigger("idle");
-        //     playerAnim.ResetTrigger("jump");
 
-        // }
-
-        //Sprint
-        if (walking == true)
+        // Sprint animation
+        if (walking && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
-
-            if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) // this needs testing
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-
-                if (Input.GetKeyDown(KeyCode.LeftShift))
-                {
-                    playerAnim.SetTrigger("run");
-                    playerAnim.ResetTrigger("jog");
-                }
-
-                if (Input.GetKeyUp(KeyCode.LeftShift))
-                {
-                    playerAnim.SetTrigger("jog");
-                    playerAnim.ResetTrigger("run");
-                }
+                playerAnim.SetTrigger("run");
+                playerAnim.ResetTrigger("jog");
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                playerAnim.SetTrigger("jog");
+                playerAnim.ResetTrigger("run");
             }
         }
+    }
 
-        //rotate player on x
-        //Yaw rotates the camera around its local Up axis
-        transform.Rotate(Vector3.up * Time.deltaTime * Input.GetAxis("Mouse X") * rotationspeed);
-
-
-
-        float mouseY = Input.GetAxis("Mouse Y") * rotationspeed * Time.deltaTime;
+    void HandleCameraInput()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * 500f * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * 500f * Time.deltaTime;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, minX, maxX);
-
-        Camera.main.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-
-
-
-
-        //this needs better implementation
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-
-        movimento = new Vector3(horizontal, 0f, vertical).normalized;
     }
-
-
-
 
     private IEnumerator jump()
     {
         yield return new WaitForSeconds(0.6f);
-        //transform.position += transform.TransformDirection(Vector3.up) * Time.deltaTime * movementSpeed;
-        playerRb.AddForce(Vector2.up * jumpPower);
-
+        playerRb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
     }
 
-    //Colisions
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Empurravel"))
         {
             Rigidbody rbObjeto = collision.rigidbody;
-
             if (rbObjeto != null && !rbObjeto.isKinematic)
             {
                 Vector3 direcaoEmpurrao = new Vector3(movimento.x, 0f, movimento.z);
-
                 if (direcaoEmpurrao.magnitude > 0.1f)
-                {
                     rbObjeto.AddForce(direcaoEmpurrao.normalized * forcaEmpurrao, ForceMode.Force);
-                }
             }
         }
     }
-
 }

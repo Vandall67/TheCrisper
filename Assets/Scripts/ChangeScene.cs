@@ -11,8 +11,6 @@ public class ChangeScene : MonoBehaviour
     {
         Debug.Log(scenename); 
         SceneManager.LoadScene(scenename);
-
     }
-
 
 }
