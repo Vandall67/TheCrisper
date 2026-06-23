@@ -38,7 +38,7 @@ public class PlayerCamera : MonoBehaviour
         targetDeviation = deviationOffset; 
 
         // Lock and hide the cursor
-        Cursor.lockState = CursorLockMode.Locked;
+       Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
