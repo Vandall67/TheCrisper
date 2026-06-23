@@ -23,15 +23,23 @@ public class AudioBlueVision : MonoBehaviour
 
     private void Update()
     {
-        if (blueVisionOverlay == null) return;
+        if (blueVisionOverlay == null)
+        {
+            return;
+        }
 
         bool isActive = blueVisionOverlay.activeSelf;
 
         if (!wasActive && isActive && sfxVisionActivate != null)
         {
-            audioSource.PlayOneShot(sfxVisionActivate, volume);
+            audioSource.PlayOneShot(sfxVisionActivate, GetFinalVolume());
         }
 
         wasActive = isActive;
+    }
+
+    private float GetFinalVolume()
+    {
+        return volume * AudioVolumeManager.SfxVolume;
     }
 }

@@ -22,12 +22,17 @@ public class AudioShelfCreak : MonoBehaviour
     private void Start()
     {
         if (playerTransform != null)
+        {
             lastPosition = playerTransform.position;
+        }
     }
 
     private void Update()
     {
-        if (playerTransform == null || sfxShelfCreaks == null || sfxShelfCreaks.Length == 0) return;
+        if (playerTransform == null || sfxShelfCreaks == null || sfxShelfCreaks.Length == 0)
+        {
+            return;
+        }
 
         Vector3 currentPosition = playerTransform.position;
 
@@ -35,18 +40,27 @@ public class AudioShelfCreak : MonoBehaviour
             Time.time - lastCreakTime > minTimeBetweenCreaks)
         {
             int index;
+
             do
             {
                 index = Random.Range(0, sfxShelfCreaks.Length);
-            } while (index == lastCreakIndex && sfxShelfCreaks.Length > 1);
+            }
+            while (index == lastCreakIndex && sfxShelfCreaks.Length > 1);
 
             if (sfxShelfCreaks[index] != null)
-                audioSource.PlayOneShot(sfxShelfCreaks[index], volume);
+            {
+                audioSource.PlayOneShot(sfxShelfCreaks[index], GetFinalVolume());
+            }
 
             lastCreakTime = Time.time;
             lastCreakIndex = index;
         }
 
         lastPosition = currentPosition;
+    }
+
+    private float GetFinalVolume()
+    {
+        return volume * AudioVolumeManager.SfxVolume;
     }
 }

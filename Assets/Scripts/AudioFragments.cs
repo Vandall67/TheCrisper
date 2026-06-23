@@ -21,25 +21,39 @@ public class AudioFragments : MonoBehaviour
     private void Start()
     {
         if (gameManager != null)
-            lastFragmentCount = gameManager.FragmentosRecolhidos; //fragmentosRecolhidos;
+        {
+            lastFragmentCount = gameManager.FragmentosRecolhidos;
+        }
     }
 
     private void Update()
     {
-        if (gameManager == null) return;
+        if (gameManager == null)
+        {
+            return;
+        }
 
-        if (gameManager.FragmentosRecolhidos > lastFragmentCount) //fragmentosRecolhidos;
+        if (gameManager.FragmentosRecolhidos > lastFragmentCount)
         {
             if (sfxFragmentCollect != null)
-                audioSource.PlayOneShot(sfxFragmentCollect, volume);
+            {
+                audioSource.PlayOneShot(sfxFragmentCollect, GetFinalVolume());
+            }
 
-            lastFragmentCount = gameManager.FragmentosRecolhidos; //fragmentosRecolhidos;
+            lastFragmentCount = gameManager.FragmentosRecolhidos;
 
-            if (gameManager.FragmentosRecolhidos >= gameManager.TotalFragmentos) //totalFragmentos
+            if (gameManager.FragmentosRecolhidos >= gameManager.TotalFragmentos)
             {
                 if (sfxGameOverFreeze != null)
-                    audioSource.PlayOneShot(sfxGameOverFreeze, volume);
+                {
+                    audioSource.PlayOneShot(sfxGameOverFreeze, GetFinalVolume());
+                }
             }
         }
+    }
+
+    private float GetFinalVolume()
+    {
+        return volume * AudioVolumeManager.SfxVolume;
     }
 }

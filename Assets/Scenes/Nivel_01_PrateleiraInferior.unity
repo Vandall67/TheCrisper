@@ -2262,6 +2262,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4140388520940184043, guid: ad22844758c56244ab1a972bf9b01d55, type: 3}
+      propertyPath: m_text
+      value: "Som Frigor\xEDfico"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140388520940184043, guid: ad22844758c56244ab1a972bf9b01d55, type: 3}
       propertyPath: m_fontColor.g
       value: 1
       objectReference: {fileID: 0}
