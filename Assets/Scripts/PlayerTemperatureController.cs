@@ -20,6 +20,7 @@ public class PlayerTemperatureController : MonoBehaviour
     [SerializeField] private string gameOverSceneName = "GameOver";
     [SerializeField] private bool triggerGameOverAtZero = true;
 
+    public Animator playerAnim;
     public float CurrentTemperature => currentTemperature;
     public float MaxTemperature => maxTemperature;
     public float TemperaturePercentage => maxTemperature <= 0f ? 0f : (currentTemperature / maxTemperature) * 100f;
@@ -103,6 +104,9 @@ public class PlayerTemperatureController : MonoBehaviour
     {
         gameOverTriggered = true;
         Time.timeScale = 1f;
-        SceneManager.LoadScene(gameOverSceneName);
+        playerAnim.SetTrigger("idle");
+        playerAnim.SetTrigger("death");
+        
+        //SceneManager.LoadScene(gameOverSceneName);
     }
 }

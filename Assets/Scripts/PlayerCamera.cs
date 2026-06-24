@@ -22,6 +22,9 @@ public class PlayerCamera : MonoBehaviour
     public float deviationResetSpeed = 5f;   // how fast it centers when moving
     public float deviationReturnSpeed = 3f;
 
+    [Header("MainBody")] 
+    [SerializeField] private GameObject Mainbody;
+
     private float yaw;    // horizontal rotation
     private float pitch;  // vertical rotation
     private Vector3 deviationOffset;
@@ -52,6 +55,11 @@ public class PlayerCamera : MonoBehaviour
         pitch = Mathf.Clamp(pitch, minVerticalAngle, maxVerticalAngle);
 
         bool isMoving = Input.GetKey(KeyCode.W);
+        if (!Mainbody.activeSelf)
+        {
+            isMoving = false;
+        }
+
         if (isMoving)
             targetDeviation = Vector3.zero;
         else

@@ -7,8 +7,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform Camera;
     [SerializeField] private float forcaEmpurrao = 8f;
-    [SerializeField] private float jumpPower;
-    [SerializeField] private float rotationSpeed = 10f; // Slerp-friendly value
+    [SerializeField] private float jumpPower = 0.7f;
+    [SerializeField] private float rotationSpeed = 10f;
+
+
+    [Header("Cold Penalty")]
+    [SerializeField] private float minimumMovementMultiplier = 0.5f;
+    [SerializeField] private float minimumJumpMultiplier = 0.5f;
 
     [Header("Push Audio")]
     [SerializeField] private AudioClip pushObjectSfx;
@@ -31,6 +36,22 @@ public class PlayerMovement : MonoBehaviour
     public Animator playerAnim;
     private Rigidbody playerRb;
 
+    private bool canMove = true;
+
+    private bool canJump = true;
+
+    private PlayerTemperatureController temperatureController;
+
+
+
+
+
+
+    [SerializeField] private GameObject Secondbody;
+    [SerializeField] private GameObject Mainbody;
+
+
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -45,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         HandleRotation();
         HandleAnimations();
         HandleCameraInput();
+        HandleBlueVision();
     }
 
     void FixedUpdate()
@@ -75,6 +97,8 @@ public class PlayerMovement : MonoBehaviour
     {
         movimento = Vector3.zero;
 
+        if (!canMove) return; // this will stop movement
+
         if (Input.GetKey(KeyCode.W))
             movimento += transform.TransformDirection(Vector3.forward);
         if (Input.GetKey(KeyCode.S))
@@ -87,12 +111,60 @@ public class PlayerMovement : MonoBehaviour
         // Sprint
         movementSpeed = (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W)) ? 10f : 5f;
 
+        float baseSpeed = 5f;
+
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        {
+            baseSpeed = 10f;
+        }
+
+        float movementMultiplier = GetMovementTemperatureMultiplier();
+
+        movementSpeed = baseSpeed * movementMultiplier;
+
         transform.position += movimento.normalized * movementSpeed * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && canJump)
             StartCoroutine(jump());
     }
 
+    float GetMovementTemperatureMultiplier()
+    {
+        if (temperatureController == null)
+        {
+            return 1f;
+        }
+
+        float temperaturePercentage = temperatureController.TemperaturePercentage;
+
+        if (temperaturePercentage > 50f)
+        {
+            return 1f;
+        }
+
+        float factor = temperaturePercentage / 50f;
+
+        return Mathf.Lerp(minimumMovementMultiplier, 1f, factor);
+    }
+
+    float GetJumpTemperatureMultiplier()
+    {
+        if (temperatureController == null)
+        {
+            return 1f;
+        }
+
+        float temperaturePercentage = temperatureController.TemperaturePercentage;
+
+        if (temperaturePercentage > 50f)
+        {
+            return 1f;
+        }
+
+        float factor = temperaturePercentage / 50f;
+
+        return Mathf.Lerp(minimumJumpMultiplier, 1f, factor);
+    }
     void HandleAnimations()
     {
         // Forward
@@ -146,10 +218,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Jump
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
-            playerAnim.SetTrigger("jump");
-            playerAnim.ResetTrigger("idle");
+
+            //StartCoroutine(stopjumpanimation());
+            //playerAnim.ResetTrigger("idle");
         }
 
         // Sprint animation
@@ -168,6 +241,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     void HandleCameraInput()
     {
         float mouseX = Input.GetAxis("Mouse X") * 500f * Time.deltaTime;
@@ -177,10 +251,105 @@ public class PlayerMovement : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, minX, maxX);
     }
 
+
+
+
+    ///---------------------------------BLUEVISION
+    void HandleBlueVision()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            canMove = false; //stop Player Movement
+            playerAnim.SetTrigger("idle"); //set the animation 
+            StartCoroutine(waitzerofive());
+        }
+    }
+
+
+    //PHASE - 1
+    private IEnumerator waitzerofive()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Mainbody.SetActive(!Mainbody.activeSelf);
+        Secondbody.SetActive(!Secondbody.activeSelf);
+        StartCoroutine(wait());
+    }
+
+
+    //PHASE - 2
+    private IEnumerator wait()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Debug.Log("blue");
+        Mainbody.SetActive(!Mainbody.activeSelf);
+        Secondbody.SetActive(!Secondbody.activeSelf);
+        canMove = true;
+    }
+
+
+
+    //---------------------------JUMP
+    // private IEnumerator jump()
+    // {
+    //     yield return new WaitForSeconds(0.6f);
+    //     playerRb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+
+    //     //sfloat jumpMultiplier = GetJumpTemperatureMultiplier();
+
+    //     // playerRb.AddForce(Vector3.up * jumpPower * jumpMultiplier, ForceMode.Impulse);
+    // }
+
+
+    // private IEnumerator stopjumpanimation()
+    // {
+    //     playerAnim.SetTrigger("idle");
+
+
+    //     // Wait one frame for animator to process the trigger
+    //     yield return null;
+    //     yield return new WaitUntil(() =>
+    //     playerAnim.GetCurrentAnimatorStateInfo(0).IsName("idle"));
+
+    //     playerAnim.SetTrigger("jump");
+
+    //     // Wait until we're actually IN the jump state
+    //     yield return new WaitUntil(() =>
+    //         playerAnim.GetCurrentAnimatorStateInfo(0).IsName("jump"));
+
+
+    //     yield return new WaitForSeconds(0.6f);
+    //     playerAnim.speed = 0.2f; // pause animation use value 0 i am going to slow it down
+    //     yield return new WaitForSeconds(1.10f);
+    //     playerAnim.speed = 1; // playback
+    // }
+
+
     private IEnumerator jump()
     {
-        yield return new WaitForSeconds(0.6f);
-        playerRb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+        canJump = false; // block immediately
+
+        // Trigger animation first
+        playerAnim.SetTrigger("idle");
+        yield return null;
+        yield return new WaitUntil(() =>
+            playerAnim.GetCurrentAnimatorStateInfo(0).IsName("idle"));
+
+        playerAnim.SetTrigger("jump");
+        yield return new WaitUntil(() =>
+            playerAnim.GetCurrentAnimatorStateInfo(0).IsName("jump"));
+
+        yield return new WaitForSeconds(0.4f);
+        playerRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+
+        //sfloat jumpMultiplier = GetJumpTemperatureMultiplier();
+
+        // playerRb.AddForce(Vector3.up * jumpPower * jumpMultiplier, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.1f);
+        playerAnim.speed = 0.2f;
+        yield return new WaitForSeconds(1.10f);
+        playerAnim.speed = 1f;
+
+        canJump = true; // re-enable only after fully done
     }
 
     private void OnCollisionStay(Collision collision)
