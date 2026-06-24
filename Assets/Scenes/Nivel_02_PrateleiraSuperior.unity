@@ -1057,6 +1057,7 @@ MonoBehaviour:
   blueVisionController: {fileID: 926367622}
   gameOverSceneName: GameOver
   triggerGameOverAtZero: 1
+  playerAnim: {fileID: 0}
 --- !u!1001 &525633295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1833,6 +1834,7 @@ MonoBehaviour:
   hudController: {fileID: 297161545}
   blueVisionOverlay: {fileID: 2078091112}
   isBlueVisionActive: 0
+  playerAnim: {fileID: 0}
 --- !u!4 &926367623
 Transform:
   m_ObjectHideFlags: 0
