@@ -10,6 +10,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpPower;
     [SerializeField] private float rotationSpeed = 10f; // Slerp-friendly value
 
+    [Header("Push Audio")]
+    [SerializeField] private AudioClip pushObjectSfx;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float pushObjectVolume = 0.6f;
+
+    [SerializeField] private float minTimeBetweenPushSounds = 0.45f;
+
+    private AudioSource pushAudioSource;
+    private float lastPushSoundTime;
+
     private float movementSpeed = 5f;
     private Vector3 movimento;
     private float xRotation = 0f;
@@ -23,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        pushAudioSource = gameObject.AddComponent<AudioSource>();
+        pushAudioSource.playOnAwake = false;
+        pushAudioSource.loop = false;
+        pushAudioSource.spatialBlend = 0f;
     }
 
     void Update()
@@ -170,15 +185,46 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Empurravel"))
+        if (!collision.gameObject.CompareTag("Empurravel"))
         {
-            Rigidbody rbObjeto = collision.rigidbody;
-            if (rbObjeto != null && !rbObjeto.isKinematic)
-            {
-                Vector3 direcaoEmpurrao = new Vector3(movimento.x, 0f, movimento.z);
-                if (direcaoEmpurrao.magnitude > 0.1f)
-                    rbObjeto.AddForce(direcaoEmpurrao.normalized * forcaEmpurrao, ForceMode.Force);
-            }
+            return;
         }
+
+        Rigidbody rbObjeto = collision.rigidbody;
+
+        if (rbObjeto == null || rbObjeto.isKinematic)
+        {
+            return;
+        }
+
+        Vector3 direcaoEmpurrao = new Vector3(movimento.x, 0f, movimento.z);
+
+        if (direcaoEmpurrao.magnitude <= 0.1f)
+        {
+            return;
+        }
+
+        rbObjeto.AddForce(direcaoEmpurrao.normalized * forcaEmpurrao, ForceMode.Force);
+        PlayPushObjectSound();
+    }
+
+    private void PlayPushObjectSound()
+    {
+        if (pushObjectSfx == null || pushAudioSource == null)
+        {
+            return;
+        }
+
+        if (Time.time - lastPushSoundTime < minTimeBetweenPushSounds)
+        {
+            return;
+        }
+
+        pushAudioSource.PlayOneShot(
+            pushObjectSfx,
+            pushObjectVolume * AudioVolumeManager.SfxVolume
+        );
+
+        lastPushSoundTime = Time.time;
     }
 }

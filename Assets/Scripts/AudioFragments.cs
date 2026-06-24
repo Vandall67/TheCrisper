@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioFragments : MonoBehaviour
@@ -10,12 +11,19 @@ public class AudioFragments : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float volume = 1f;
 
+    [Header("Fragment Pickup Audio")]
+    [SerializeField] private float fragmentSoundMaxDuration = 1.1f;
+
     private AudioSource audioSource;
     private int lastFragmentCount;
+    private Coroutine stopFragmentSoundCoroutine;
 
     private void Awake()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+        audioSource.spatialBlend = 0f;
     }
 
     private void Start()
@@ -35,10 +43,7 @@ public class AudioFragments : MonoBehaviour
 
         if (gameManager.FragmentosRecolhidos > lastFragmentCount)
         {
-            if (sfxFragmentCollect != null)
-            {
-                audioSource.PlayOneShot(sfxFragmentCollect, GetFinalVolume());
-            }
+            PlayFragmentCollectSound();
 
             lastFragmentCount = gameManager.FragmentosRecolhidos;
 
@@ -49,6 +54,36 @@ public class AudioFragments : MonoBehaviour
                     audioSource.PlayOneShot(sfxGameOverFreeze, GetFinalVolume());
                 }
             }
+        }
+    }
+
+    private void PlayFragmentCollectSound()
+    {
+        if (sfxFragmentCollect == null)
+        {
+            return;
+        }
+
+        audioSource.Stop();
+        audioSource.clip = sfxFragmentCollect;
+        audioSource.volume = GetFinalVolume();
+        audioSource.Play();
+
+        if (stopFragmentSoundCoroutine != null)
+        {
+            StopCoroutine(stopFragmentSoundCoroutine);
+        }
+
+        stopFragmentSoundCoroutine = StartCoroutine(StopFragmentSoundAfterDelay());
+    }
+
+    private IEnumerator StopFragmentSoundAfterDelay()
+    {
+        yield return new WaitForSeconds(fragmentSoundMaxDuration);
+
+        if (audioSource != null && audioSource.clip == sfxFragmentCollect)
+        {
+            audioSource.Stop();
         }
     }
 
