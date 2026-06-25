@@ -21,21 +21,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1029786653689344566
-Transform:
+--- !u!224 &1029786653689344566
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3082607686424434060}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.65336597, y: -0, z: -0, w: 0.7570422}
-  m_LocalPosition: {x: -107.2, y: 26.32, z: 168.9927}
+  m_LocalRotation: {x: 0.5127922, y: 0, z: 0, w: 0.85851276}
+  m_LocalPosition: {x: 0, y: 0, z: 168.9927}
   m_LocalScale: {x: 0.76000005, y: 0.06514286, z: 0.54285717}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 81.592, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 61.7, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -107.2, y: 26.32}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &8159401953044493446
 MeshFilter:
   m_ObjectHideFlags: 0

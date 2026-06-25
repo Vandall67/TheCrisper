@@ -13,7 +13,8 @@ public class HUDController : MonoBehaviour
     [SerializeField] private Image temperatureBarFill;
 
     [Header("BackPack HeatLevel")]
-    [SerializeField] private GameObject BackPackPlane;
+    [SerializeField] private GameObject BackPackPlane1;
+    [SerializeField] private GameObject BackPackPlane2;
 
     [Header("Initial Values")]
     [SerializeField] private int totalFragments = 4;
@@ -96,8 +97,9 @@ public class HUDController : MonoBehaviour
             temperatureBarFill.fillAmount = clampedTemperature / 100f;
 
            // BackPackPlane.transform.localScale = new Vector3((clampedTemperature/1000f)*0.025f , 0.11f ,0.004f);
-            BackPackPlane.transform.localScale = new Vector3((clampedTemperature/1000f)*0.0025f , 0.10f ,0.000016f);
-            Debug.Log( BackPackPlane.transform.localScale);
+            BackPackPlane1.transform.localScale = new Vector3((clampedTemperature/1000f)*0.0025f , 0.10f ,0.000016f);
+            BackPackPlane2.transform.localScale = new Vector3((clampedTemperature/1000f)*0.0025f , 0.10f ,0.000016f);
+            Debug.Log( BackPackPlane1.transform.localScale);
 
         }
     }
