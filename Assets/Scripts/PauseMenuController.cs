@@ -20,11 +20,9 @@ public class PauseMenuController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-
+        //if (Input.GetKeyDown(KeyCode.Escape)) // when using escape to resume the cursor leaves when you go back to gameplay so using another key
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true; 
             if (isPaused)
             {
                 ResumeGame();
@@ -33,13 +31,12 @@ public class PauseMenuController : MonoBehaviour
             {
                 PauseGame();
             }
+            //Debug.Log(isPaused);
         }
     }
 
     public void ResumeGame()
     {
-        Debug.Log("Resume Game clicked.");
-
         isPaused = false;
 
         if (pauseMenuCanvas != null)
@@ -50,6 +47,7 @@ public class PauseMenuController : MonoBehaviour
         ShowPausePanel();
         Time.timeScale = 1f;
 
+        //hide Cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -65,6 +63,10 @@ public class PauseMenuController : MonoBehaviour
 
         ShowPausePanel();
         Time.timeScale = 0f;
+
+        //show Cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void OpenOptions()

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerTemperatureController : MonoBehaviour
 {
@@ -106,7 +107,19 @@ public class PlayerTemperatureController : MonoBehaviour
         Time.timeScale = 1f;
         playerAnim.SetTrigger("idle");
         playerAnim.SetTrigger("death");
-        
-        //SceneManager.LoadScene(gameOverSceneName);
+
+        //show Cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        StartCoroutine(LoadGameOverScene());
+    }
+
+
+    //Load next scene after death and after a few seconds
+    private IEnumerator LoadGameOverScene()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(gameOverSceneName);
     }
 }

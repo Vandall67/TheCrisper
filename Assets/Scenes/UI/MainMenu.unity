@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cbbc99f26763e24ea89a7ea5f0d4f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeScene
-  scenename: Nivel_01_PrateleiraInferior
+  scenename: Cut1
 --- !u!1 &1108552552
 GameObject:
   m_ObjectHideFlags: 0

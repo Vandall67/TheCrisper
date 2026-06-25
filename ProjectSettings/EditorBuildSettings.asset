@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/EndDemo.unity
     guid: 25c780d42b8136946ba6663f3e0c76d7
+  - enabled: 1
+    path: Assets/Scenes/Cut1.unity
+    guid: 814d3dd786ed9ea4dbcbd662396752db
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

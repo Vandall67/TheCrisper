@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2089077368077783034}
   - component: {fileID: 2734591817295840108}
   - component: {fileID: 14498535801432052}
+  - component: {fileID: 4716711103897649469}
   m_Layer: 0
   m_Name: Heatbattery
   m_TagString: Untagged
@@ -28,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3294061231710611627}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5106561, y: 0.48911175, z: 0.51065606, w: 0.48911184}
+  m_LocalRotation: {x: -0.40098068, y: 0.42511964, z: 0.57685095, w: 0.5707283}
   m_LocalPosition: {x: -2.5706003, y: 0.67, z: 4.3108}
   m_LocalScale: {x: 0.276717, y: -0.27671704, z: 0.27671704}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -108.529, y: 184.086, z: -92.32901}
 --- !u!33 &8674984087665043911
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -132,3 +133,25 @@ CapsuleCollider:
   m_Height: 0.01342961
   m_Direction: 1
   m_Center: {x: -0.0000009555099, y: -0.000000954817, z: -0.0007223618}
+--- !u!95 &4716711103897649469
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3294061231710611627}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 76f191715c1954b4b9036ef974b3b7a8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

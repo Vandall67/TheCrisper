@@ -12,14 +12,33 @@ public class HUDController : MonoBehaviour
     [Header("HUD Bars")]
     [SerializeField] private Image temperatureBarFill;
 
+    [Header("BackPack HeatLevel")]
+    [SerializeField] private GameObject BackPackPlane;
+
     [Header("Initial Values")]
     [SerializeField] private int totalFragments = 4;
+
+
+    private Vector3 originalScale;
+    private Vector3 originalPos;
+    float halfWidth;
+
 
     private void Start()
     {
         UpdateTemperature(100);
         UpdateFragments(0);
         UpdateBlueVision(false);
+
+
+
+
+        originalScale = new Vector3(1,1,1);
+        //originalPos = BackPackPlane.transform.localPosition;
+
+
+        Debug.Log(originalScale);
+        Debug.Log(originalPos);
     }
 
     private void Update()
@@ -49,15 +68,15 @@ public class HUDController : MonoBehaviour
             UpdateFragments(4);
         }
 
-       /*  if (Input.GetKeyDown(KeyCode.B))
-        {
-            UpdateBlueVision(true);
-        }
+        /*  if (Input.GetKeyDown(KeyCode.B))
+         {
+             UpdateBlueVision(true);
+         }
 
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            UpdateBlueVision(false);
-        } */
+         if (Input.GetKeyDown(KeyCode.N))
+         {
+             UpdateBlueVision(false);
+         } */
     }
 
     public void UpdateTemperature(float temperaturePercentage)
@@ -72,7 +91,14 @@ public class HUDController : MonoBehaviour
 
         if (temperatureBarFill != null)
         {
+           //Debug.Log(clampedTemperature);
+            
             temperatureBarFill.fillAmount = clampedTemperature / 100f;
+
+           // BackPackPlane.transform.localScale = new Vector3((clampedTemperature/1000f)*0.025f , 0.11f ,0.004f);
+            BackPackPlane.transform.localScale = new Vector3((clampedTemperature/1000f)*0.0025f , 0.10f ,0.000016f);
+            Debug.Log( BackPackPlane.transform.localScale);
+
         }
     }
 
