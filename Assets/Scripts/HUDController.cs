@@ -44,30 +44,30 @@ public class HUDController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            UpdateTemperature(100);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha1))
+        // {
+        //     UpdateTemperature(100);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            UpdateTemperature(60);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha2))
+        // {
+        //     UpdateTemperature(60);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            UpdateTemperature(25);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha3))
+        // {
+        //     UpdateTemperature(25);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            UpdateFragments(1);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha4))
+        // {
+        //     UpdateFragments(1);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            UpdateFragments(4);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha5))
+        // {
+        //     UpdateFragments(4);
+        // }
 
         /*  if (Input.GetKeyDown(KeyCode.B))
          {

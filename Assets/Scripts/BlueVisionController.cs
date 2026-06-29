@@ -22,6 +22,10 @@ public class BlueVisionController : MonoBehaviour
     private void Start()
     {   // Find all revealable objects in the scene at the start and cache them
         revealableObjects = FindObjectsByType<BlueVisionRevealable>(FindObjectsSortMode.None);
+        foreach (var obj in revealableObjects)
+        {
+            Debug.Log($"!!!!!!!!!!!!!!!Found: {obj.name} at {obj.transform.position}");
+        }
         SetBlueVisionState(false);
     }
 
@@ -29,7 +33,6 @@ public class BlueVisionController : MonoBehaviour
     {
         if (Input.GetKeyDown(toggleKey))// Toggle blue vision when the specified key is pressed
         {
-            playerAnim.SetTrigger("blue");
             ToggleBlueVision();
         }
     }

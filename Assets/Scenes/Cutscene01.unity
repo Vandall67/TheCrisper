@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cbbc99f26763e24ea89a7ea5f0d4f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeScene
-  scenename: Nivel_01_PrateleiraInferior
+  scenename: LoadingScreen
 --- !u!1 &276505861
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e82703968dbb0449d80f4e325fb962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutScenes
-  scenename: Nivel_01_PrateleiraInferior
+  scenename: LoadingScreen
   CutsceneDuration: 17
 --- !u!4 &276505863
 Transform:
