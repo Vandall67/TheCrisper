@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeatBatteryPickup
   restoreAmount: 30
-  pickupSfx: {fileID: 8300000, guid: 656fe9c10eabbf24ba84725931111504, type: 3}
+  pickupSfx: {fileID: 8300000, guid: 4e86d97bc50ce3e4c994e55bf7ac77cd, type: 3}
   pickupVolume: 2
   playerTag: Player
   destroyAfterPickup: 1

@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1041e94814524bc4d8161fe272afbd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadingScreenController
-  targetSceneName: Nivel_01_PrateleiraInferior
+  targetSceneName: FirstPersonCutscene
   minimumLoadingTime: 1.5
   loadingBarFill: {fileID: 1841945058}
 --- !u!4 &893992218
