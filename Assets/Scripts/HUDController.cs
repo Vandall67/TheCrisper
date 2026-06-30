@@ -38,8 +38,8 @@ public class HUDController : MonoBehaviour
         //originalPos = BackPackPlane.transform.localPosition;
 
 
-        Debug.Log(originalScale);
-        Debug.Log(originalPos);
+       // Debug.Log(originalScale);
+       // Debug.Log(originalPos);
     }
 
     private void Update()
@@ -99,7 +99,7 @@ public class HUDController : MonoBehaviour
            // BackPackPlane.transform.localScale = new Vector3((clampedTemperature/1000f)*0.025f , 0.11f ,0.004f);
             BackPackPlane1.transform.localScale = new Vector3((clampedTemperature/1000f)*0.0025f , 0.10f ,0.000016f);
             BackPackPlane2.transform.localScale = new Vector3((clampedTemperature/1000f)*0.0025f , 0.10f ,0.000016f);
-            Debug.Log( BackPackPlane1.transform.localScale);
+            //Debug.Log( BackPackPlane1.transform.localScale);
 
         }
     }

@@ -4554,11 +4554,16 @@ PrefabInstance:
       propertyPath: baseTemperatureLossPerSecond
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7322353200276154249, guid: b9dd4c56e132ed14fb24b8fc666e91fa, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8550776239505554978, guid: b9dd4c56e132ed14fb24b8fc666e91fa, type: 3}
       propertyPath: m_Name
       value: PlayerV5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7322353200276154249, guid: b9dd4c56e132ed14fb24b8fc666e91fa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool loadSceneWhenMapComplete = false;
     [SerializeField] private string nomeCenaSeguinte;
 
+    [Header("Optional For Level 2")]
+    [SerializeField] private bool showmapcutscene = false;
+    [SerializeField] private GameObject cutscenescreanhud;
+
     public int FragmentosRecolhidos => fragmentosRecolhidos;
     public int TotalFragmentos => totalFragmentos;
     public bool MapaCompleto => fragmentosRecolhidos >= totalFragmentos;
@@ -39,7 +43,14 @@ public class GameManager : MonoBehaviour
             {
                 SceneManager.LoadScene(nomeCenaSeguinte);
             }
+
+            if (showmapcutscene)
+            {
+                cutscenescreanhud.SetActive(true);
+            }
         }
+
+
     }
 
     private void AtualizarHUDFragmentos()

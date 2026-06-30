@@ -280,7 +280,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator wait()
     {
         yield return new WaitForSeconds(1.5f);
-        Debug.Log("blue");
+       // Debug.Log("blue");
         Mainbody.SetActive(!Mainbody.activeSelf);
         Secondbody.SetActive(!Secondbody.activeSelf);
         canMove = true;

@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/GameOver.unity
     guid: 0f3671e51aa81ab438181d7773258322
   - enabled: 1
-    path: Assets/Scenes/UI/EndGame.unity
+    path: Assets/Scenes/UI/EndGame - (Archived).unity
     guid: a88a1bba958ff444e904ecb5a547b7d2
   - enabled: 1
     path: Assets/Scenes/Nivel_01_PrateleiraInferior.unity
@@ -35,5 +35,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Nivel_02_PrateleiraInferior.unity
     guid: f49c4b198b91bbd4ebdfbdffbdfb599d
+  - enabled: 1
+    path: Assets/Scenes/UI/EndGame 1.unity
+    guid: 28e704ad060e26e469566839a270d14b
+  - enabled: 1
+    path: Assets/Scenes/Cutscene_Final.unity
+    guid: 2087dec46b5de734f81dff787990f39f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -24,7 +24,7 @@ public class BlueVisionController : MonoBehaviour
         revealableObjects = FindObjectsByType<BlueVisionRevealable>(FindObjectsSortMode.None);
         foreach (var obj in revealableObjects)
         {
-            Debug.Log($"!!!!!!!!!!!!!!!Found: {obj.name} at {obj.transform.position}");
+            //Debug.Log($"!!!!!!!!!!!!!!!Found: {obj.name} at {obj.transform.position}");
         }
         SetBlueVisionState(false);
     }

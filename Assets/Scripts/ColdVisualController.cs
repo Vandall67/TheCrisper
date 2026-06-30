@@ -16,7 +16,7 @@ public class ColdVisualController : MonoBehaviour
     [SerializeField] private float maxFrostAlpha = 0.85f;
 
     [Header("Debug Controls")]
-    [SerializeField] private bool enableDebugKeys = true;
+    [SerializeField] private bool enableDebugKeys = false;
 
     private void Start()
     {
