@@ -44,6 +44,9 @@ public class LevelEndTrigger : MonoBehaviour
         }
 
         Time.timeScale = 1f;
+        //show cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene(sceneToLoad);
     }
 }

@@ -40,12 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canJump = true;
 
-    private PlayerTemperatureController temperatureController;
 
-
-
-
-
+    [SerializeField] private PlayerTemperatureController temperatureController;
 
     [SerializeField] private GameObject Secondbody;
     [SerializeField] private GameObject Mainbody;
@@ -339,7 +335,11 @@ public class PlayerMovement : MonoBehaviour
             playerAnim.GetCurrentAnimatorStateInfo(0).IsName("jump"));
 
         yield return new WaitForSeconds(0.4f);
-        playerRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+
+        float jumpMultiplier = GetJumpTemperatureMultiplier();
+
+
+        playerRb.AddForce(Vector3.up * jumpPower * jumpMultiplier , ForceMode.Impulse);
 
         //sfloat jumpMultiplier = GetJumpTemperatureMultiplier();
 

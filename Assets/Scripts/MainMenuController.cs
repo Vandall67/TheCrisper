@@ -10,9 +10,16 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject mainPanelGroup;
     [SerializeField] private GameObject optionsPanelGroup;
 
+    [SerializeField] private GameObject ContinueButton;
+    [SerializeField] private string gameplaySceneName2 = "Nivel_02_PrateleiraSuperior";
+
     private void Start()
     {
         ShowMainPanel();
+        if(GameGlobal.levelcompleted == 1)
+        {
+            ContinueButton.SetActive(true);
+        }
     }
 
     public void StartGame()
@@ -75,5 +82,11 @@ public class MainMenuController : MonoBehaviour
         {
             optionsPanelGroup.SetActive(true);
         }
+    }
+
+
+    public void ContinueGame()
+    {
+        SceneManager.LoadScene(gameplaySceneName2);
     }
 }

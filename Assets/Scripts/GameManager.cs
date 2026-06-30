@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+using System.Collections;
+
+
 public class GameManager : MonoBehaviour
 {
     [Header("Map Fragments")]
@@ -14,9 +18,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool loadSceneWhenMapComplete = false;
     [SerializeField] private string nomeCenaSeguinte;
 
+    [Header("Nivel Completo")]
+    [SerializeField] private int nivelcompleto = 0;
+
+
     [Header("Optional For Level 2")]
     [SerializeField] private bool showmapcutscene = false;
     [SerializeField] private GameObject cutscenescreanhud;
+
+    [SerializeField] private MyVideoPlayerInGame myVideoPlayerInGame;
 
     public int FragmentosRecolhidos => fragmentosRecolhidos;
     public int TotalFragmentos => totalFragmentos;
@@ -39,6 +49,10 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Mapa completo!");
 
+            GameGlobal.updatelevelcompleted(nivelcompleto);
+            int x = GameGlobal.getlevelcompleted();
+            Debug.Log("NIvel " + x.ToString() + "Completo");
+
             if (loadSceneWhenMapComplete && !string.IsNullOrEmpty(nomeCenaSeguinte))
             {
                 SceneManager.LoadScene(nomeCenaSeguinte);
@@ -47,10 +61,22 @@ public class GameManager : MonoBehaviour
             if (showmapcutscene)
             {
                 cutscenescreanhud.SetActive(true);
+                Time.timeScale = 0f;
+                myVideoPlayerInGame.StartCut();
+                StartCoroutine(waitforcutscene());
             }
         }
 
 
+    }
+
+
+
+    private IEnumerator waitforcutscene()
+    {
+        yield return new WaitForSecondsRealtime(8f);
+        cutscenescreanhud.SetActive(false); //Cutscene Duration
+        Time.timeScale = 1f;
     }
 
     private void AtualizarHUDFragmentos()
